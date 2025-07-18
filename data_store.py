@@ -7,10 +7,17 @@ Instagram - @qapil.sh04
 Github - kuzuri-03
 Telegram - kuzuri_17
 '''
+import os
 
-profile_open = open(r'includes\profile.jv', 'r')
-profile = profile_open.readlines()
-profile_open.close()
+def load_profile():
+    profile_path = os.path.join('includes', 'profile.jv')
+    try:
+        with open(profile_path, 'r') as profile_file:
+            return profile_file.readlines()
+    except FileNotFoundError:
+        return ['\n'] * 6  # Return a default profile if the file doesn't exist
+
+profile = load_profile()
 
 choice_y = ['y', 'Y', 'Yes', 'yes', 'YES']
 choice_n = ['n', 'N', 'No', 'no', 'NO']
