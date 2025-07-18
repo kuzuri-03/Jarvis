@@ -8,9 +8,11 @@ Github - kuzuri-03
 Telegram - kuzuri_17
 '''
 
-import sys, os, pyowm, pyttsx3, time, datetime, smtplib, wolframalpha, random, geocoder, webbrowser
+import sys, os, pyowm, time, datetime, smtplib, wolframalpha, random, geocoder, webbrowser
+from gtts import gTTS
 from playsound import playsound
 from data_store import *
+from apps import *
 
 #========================== Calculator Function ========================================
 class Calc:
@@ -45,19 +47,12 @@ def pr_l(sent):
 client = wolframalpha.Client('[client ID]')
 owm = pyowm.OWM('[API]')
 
-engine = pyttsx3.init()
-voices = engine.getProperty('voices')
-if voices:
-    engine.setProperty('voices', voices[0].id)
-rate = engine.getProperty('rate')
-engine.setProperty('rate', 150)
-engine.runAndWait()
-
-
 def speak(audio):
     os.system('color c')
-    engine.say(audio)
-    engine.runAndWait()
+    tts = gTTS(text=audio, lang='en')
+    tts.save("audio.mp3")
+    playsound("audio.mp3")
+    os.remove("audio.mp3")
     os.system('color a')
 
 #========================== Play Music Function ===========================================
@@ -135,7 +130,7 @@ def clear_terminal():
 
 #=====================  Chat History  ============================================
 def show_history():
-    history_file = open('includes\\history_file.jv', 'r')
+    history_file = open('hisory_file.jv', 'r')
     r_history_file = history_file.readlines()
     y = 1
 
@@ -156,7 +151,7 @@ def clear_history():
     choice = str(input())
 
     if choice in choice_y:
-        with open('includes\\history_file.jv', 'w') as history_file:
+        with open('hisory_file.jv', 'w') as history_file:
             history_file.write('')
         print(' All history cleared.')
         speak('All history cleared.')
@@ -168,7 +163,7 @@ def clear_history():
         speak('You were suppose to answer in yes or no.')
 
 def clear_history_fast():
-    with open('includes\\history_file.jv', 'w') as history_file:
+    with open('hisory_file.jv', 'w') as history_file:
         history_file.write('')
     pr(random.choice(done))
     speak(random.choice(done))
@@ -462,12 +457,17 @@ def get_my_location():
     speak(loc)
 
 #==========================  Open Files and Exe(s) ==================================================
-def open_chrome():
-    pr_f('Opening Google Chrome...')
-    chrome_dir = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-    os.startfile(chrome_dir)
-    speak('opening google chrome')
-    pr(random.choice(done))
+def open_app(query):
+    app_name = query.replace('open ', '')
+    if app_name in apps:
+        pr(f'Opening {app_name}...')
+        speak(f'Opening {app_name}')
+        os.startfile(apps[app_name])
+        pr(random.choice(done))
+        speak(random.choice(done))
+    else:
+        pr(f"I don't know how to open {app_name}.")
+        speak(f"I don't know how to open {app_name}.")
 
 #=========================   Timer ==================================================
 def set_timer():

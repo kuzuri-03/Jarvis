@@ -9,7 +9,7 @@ Telegram - kuzuri_17
 '''
 
 
-import sys, os, pyowm, pyttsx3, time, datetime, webbrowser, smtplib, wikipedia, wolframalpha, random, geocoder
+import sys, os, pyowm, time, datetime, webbrowser, smtplib, wikipedia, wolframalpha, random, geocoder
 from playsound import playsound
 from data_store import *
 from func import *
@@ -25,7 +25,7 @@ def main():
         done_rnd = random.choice(done)
 
         #=====================  Query/History  ============================================
-        history_file = open('includes\\history_file.jv', 'a')
+        history_file = open('hisory_file.jv', 'a')
         
         query = input('YOU : ')
         query = query.lower()
@@ -135,8 +135,8 @@ def main():
             get_my_location()
 
         #==========================  Open Files and Exe(s) ==================================================
-        elif 'chrome' in query:
-            open_chrome()
+        elif 'open' in query:
+            open_app(query)
 
         #=========================   Timer ==================================================
         elif 'timer' in query:
