@@ -10,9 +10,9 @@ check line 46, 47 and also 101, 102 of file "func.py" in module folder to put yo
 '''
 CREATOR: KAPIL SHARMA
 
-Mail - djkaps1707@gmail.com
+
 Twitter - QapilS
-Instagram - @qapil.sh04
+Instagram - @qapil.sh17
 Github - kuzuri-03
 Telegram - kuzuri_17
 '''
